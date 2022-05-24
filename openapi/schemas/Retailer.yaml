@@ -1,0 +1,33 @@
+type: object
+additionalProperties: false
+required:
+  - id
+  - name
+  - location
+  - operating_hours
+properties:
+  id:
+    type: string
+    description: The auto generated UUID of the retailer
+  name:
+    type: string
+    description: The retailer's name
+  location:
+    $ref: "./Location.yaml"
+    description: The retailer's location
+  contact:
+    $ref: "./Contact.yaml"
+    description: The retailer's contact
+  operating_hours:
+    $ref: "./OperatingHours.yaml"
+    description: The retailer's hours
+  default_delivery_time:
+    type: string
+    format: time
+    description: default time of day when deliveries should be completed
+  default_max_travel_time:
+    type: number
+    description: Default number of minutes a task can be in transit for this retailer
+  timezone:
+    type: string
+    description: The timezone of the retailer.

@@ -1,0 +1,2 @@
+retailer_id:
+  $ref: './path/retailerId.yaml'

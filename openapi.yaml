@@ -1,0 +1,508 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Hurry Edge API",
+    "description": "Hurry Edge API is a REST API.",
+    "version": "1.0.0",
+    "termsOfService": "https://hurry.team/tos/",
+    "contact": {
+      "email": "support@hurry.team",
+      "name": "Hurry",
+      "url": "https://hurry.team/support"
+    }
+  },
+  "paths": {
+    "/retailers": {
+      "get": {
+        "operationId": "getRetailers",
+        "summary": "Get all Retailers for admin",
+        "description": "Fetchs all Retailers.\n",
+        "tags": [
+          "Retailer",
+          "AdminAuthScope"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "metadata",
+                    "data"
+                  ],
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "last_key": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "retailers"
+                      ],
+                      "properties": {
+                        "retailers": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Retailer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createRetailer",
+        "summary": "Create a Retailer",
+        "description": "Create a new Retailer.\n",
+        "tags": [
+          "Retailer",
+          "AdminAuthScope"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "name"
+                ],
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "$ref": "#/components/schemas/Location"
+                  },
+                  "contact": {
+                    "$ref": "#/components/schemas/Contact"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "retailer"
+                      ],
+                      "properties": {
+                        "retailer": {
+                          "$ref": "#/components/schemas/Retailer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/retailers/{retailer_id}": {
+      "get": {
+        "operationId": "getRetailer",
+        "summary": "Get a Retailer",
+        "description": "Fetch a single Retailer given its Retailer id.\n",
+        "tags": [
+          "Retailer",
+          "RetailerAuthScope"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/retailer_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "retailer"
+                      ],
+                      "properties": {
+                        "retailer": {
+                          "$ref": "#/components/schemas/Retailer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateRetailer",
+        "summary": "Updates a Retailers's details",
+        "description": "Updates an Reatilers's name, location, and details\n",
+        "tags": [
+          "Retailer",
+          "RetailerAuthScope"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/retailer_id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "$ref": "#/components/schemas/Location"
+                  },
+                  "contact": {
+                    "$ref": "#/components/schemas/Contact"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "retailer"
+                      ],
+                      "properties": {
+                        "retailer": {
+                          "$ref": "#/components/schemas/Retailer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Retailer": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "location",
+          "operating_hours"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The auto generated UUID of the retailer"
+          },
+          "name": {
+            "type": "string",
+            "description": "The retailer's name"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location",
+            "description": "The retailer's location"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/Contact",
+            "description": "The retailer's contact"
+          },
+          "operating_hours": {
+            "$ref": "#/components/schemas/OperatingHours",
+            "description": "The retailer's hours"
+          },
+          "default_delivery_time": {
+            "type": "string",
+            "format": "time",
+            "description": "default time of day when deliveries should be completed"
+          },
+          "default_max_travel_time": {
+            "type": "number",
+            "description": "Default number of minutes a task can be in transit for this retailer"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "The timezone of the retailer."
+          }
+        }
+      },
+      "Location": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "coordinates",
+          "address"
+        ],
+        "properties": {
+          "coordinates": {
+            "$ref": "#/components/schemas/Coordinates",
+            "description": "The location's coordinates"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address",
+            "description": "The location's address"
+          }
+        }
+      },
+      "Coordinates": {
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "number",
+            "description": "Latitude",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "lon": {
+            "type": "number",
+            "description": "Longitude",
+            "minimum": -180,
+            "maximum": 180
+          }
+        },
+        "required": [
+          "lat",
+          "lon"
+        ]
+      },
+      "Address": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "line_one": {
+            "type": "string",
+            "description": "The first line of the address"
+          },
+          "line_two": {
+            "type": "string",
+            "description": "The second line of the address"
+          },
+          "city": {
+            "type": "string",
+            "description": "The city name."
+          },
+          "district": {
+            "type": "string",
+            "description": "The district name"
+          },
+          "state": {
+            "type": "string",
+            "description": "The state name."
+          },
+          "postal_code": {
+            "type": "string",
+            "description": "The postal code or zip code."
+          },
+          "country": {
+            "type": "string",
+            "description": "The country or region name."
+          },
+          "country_code": {
+            "type": "string",
+            "description": "The ISO country code for the country or region using the ISO 3166-1 alpha-2 standard."
+          }
+        },
+        "required": [
+          "line_one",
+          "city",
+          "postal_code",
+          "country_code"
+        ]
+      },
+      "Contact": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The contact's name"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The contact's phone number"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Any relevant instructions for the contact"
+          }
+        }
+      },
+      "OperatingHours": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sunday",
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday",
+          "saturday"
+        ],
+        "properties": {
+          "sunday": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OperatingHour"
+            },
+            "nullable": true
+          },
+          "monday": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OperatingHour"
+            },
+            "nullable": true
+          },
+          "tuesday": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OperatingHour"
+            },
+            "nullable": true
+          },
+          "wednesday": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OperatingHour"
+            },
+            "nullable": true
+          },
+          "thursday": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OperatingHour"
+            },
+            "nullable": true
+          },
+          "friday": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OperatingHour"
+            },
+            "nullable": true
+          },
+          "saturday": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OperatingHour"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "OperatingHour": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "open",
+          "close"
+        ],
+        "properties": {
+          "open": {
+            "type": "string",
+            "format": "time",
+            "description": "Opening time of the retailer"
+          },
+          "close": {
+            "type": "string",
+            "format": "time",
+            "description": "Closing time of the retailer"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "retailer_id": {
+        "name": "retailer_id",
+        "in": "path",
+        "required": true,
+        "description": "The id of the retailer",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
+

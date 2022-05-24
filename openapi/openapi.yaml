@@ -1,0 +1,27 @@
+openapi: 3.0.3
+info:
+  title: Hurry Edge API
+  description: Hurry Edge API is a REST API.
+  version: 1.0.0
+  termsOfService: https://hurry.team/tos/
+  contact:
+    email: support@hurry.team
+    name: Hurry
+    url: https://hurry.team/support
+
+paths:
+  /retailers:
+    $ref: './paths/retailers/retailers.yaml'
+  /retailers/{retailer_id}:
+    $ref: './paths/retailers/retailer.yaml'
+
+components:
+  schemas:
+    $ref: './schemas/_index.yaml'
+  parameters:
+    $ref: './parameters/_index.yaml'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

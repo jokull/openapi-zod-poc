@@ -1,0 +1,46 @@
+type: object
+additionalProperties: false
+required:
+  - sunday
+  - monday
+  - tuesday
+  - wednesday
+  - thursday
+  - friday
+  - saturday
+properties:
+  sunday:
+    type: array
+    items:
+      $ref: "./OperatingHour.yaml"
+    nullable: true
+  monday:
+    type: array
+    items:
+      $ref: "./OperatingHour.yaml"
+    nullable: true
+  tuesday:
+    type: array
+    items:
+      $ref: "./OperatingHour.yaml"
+    nullable: true
+  wednesday:
+    type: array
+    items:
+      $ref: "./OperatingHour.yaml"
+    nullable: true
+  thursday:
+    type: array
+    items:
+      $ref: "./OperatingHour.yaml"
+    nullable: true
+  friday:
+    type: array
+    items:
+      $ref: "./OperatingHour.yaml"
+    nullable: true
+  saturday:
+    type: array
+    items:
+      $ref: "./OperatingHour.yaml"
+    nullable: true

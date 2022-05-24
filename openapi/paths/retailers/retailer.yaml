@@ -1,0 +1,72 @@
+get:
+  operationId: getRetailer
+  summary: Get a Retailer
+  description: |
+    Fetch a single Retailer given its Retailer id.
+  tags:
+    - Retailer
+    - RetailerAuthScope
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: './../../parameters/path/retailerId.yaml'
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: object
+                required:
+                  - retailer
+                properties:
+                  retailer:
+                    $ref: './../../schemas/Retailer.yaml'
+
+patch:
+  operationId: updateRetailer
+  summary: Updates a Retailers's details
+  description: |
+    Updates an Reatilers's name, location, and details
+  tags:
+    - Retailer
+    - RetailerAuthScope
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: './../../parameters/path/retailerId.yaml'
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: false
+          properties:
+            name:
+              type: string
+            location:
+              $ref: './../../schemas/Location.yaml'
+            contact:
+              $ref: './../../schemas/Contact.yaml'
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: object
+                required:
+                  - retailer
+                properties:
+                  retailer:
+                    $ref: './../../schemas/Retailer.yaml'

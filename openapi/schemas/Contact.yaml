@@ -1,0 +1,12 @@
+type: object
+additionalProperties: false
+properties:
+  name:
+    type: string
+    description: The contact's name
+  phone:
+    type: string
+    description: The contact's phone number
+  instructions:
+    type: string
+    description: Any relevant instructions for the contact

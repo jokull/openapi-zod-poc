@@ -1,0 +1,14 @@
+type: object
+additionalProperties: false
+required:
+  - open
+  - close
+properties:
+  open:
+    type: string
+    format: time
+    description: Opening time of the retailer
+  close:
+    type: string
+    format: time
+    description: Closing time of the retailer

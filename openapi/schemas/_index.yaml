@@ -1,0 +1,14 @@
+Retailer:
+  $ref: './Retailer.yaml'
+Location:
+  $ref: './Location.yaml'
+Coordinates:
+  $ref: './Coordinates.yaml'
+Address:
+  $ref: './Address.yaml'
+Contact:
+  $ref: './Contact.yaml'
+OperatingHours:
+  $ref: './OperatingHours.yaml'
+OperatingHour:
+  $ref: './OperatingHour.yaml'

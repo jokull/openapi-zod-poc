@@ -1,0 +1,32 @@
+type: object
+additionalProperties: false
+properties:
+  line_one:
+    type: string
+    description: The first line of the address
+  line_two:
+    type: string
+    description: The second line of the address
+  city:
+    type: string
+    description: The city name.
+  district:
+    type: string
+    description: The district name
+  state:
+    type: string
+    description: The state name.
+  postal_code:
+    type: string
+    description: The postal code or zip code.
+  country:
+    type: string
+    description: The country or region name.
+  country_code:
+    type: string
+    description: The ISO country code for the country or region using the ISO 3166-1 alpha-2 standard.
+required:
+- line_one
+- city
+- postal_code
+- country_code

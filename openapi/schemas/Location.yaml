@@ -1,0 +1,12 @@
+type: object
+additionalProperties: false
+required:
+  - coordinates
+  - address
+properties:
+  coordinates:
+    $ref: './Coordinates.yaml'
+    description: The location's coordinates
+  address:
+    $ref: './Address.yaml'
+    description: The location's address

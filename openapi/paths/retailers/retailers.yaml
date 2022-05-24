@@ -1,0 +1,78 @@
+get:
+  operationId: getRetailers
+  summary: Get all Retailers for admin
+  description: |
+    Fetchs all Retailers.
+  tags:
+    - Retailer
+    - AdminAuthScope
+  security:
+    - bearerAuth: []
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - metadata
+              - data
+            properties:
+              metadata:
+                type: object
+                properties:
+                  last_key:
+                    type: string
+              data:
+                type: object
+                required:
+                  - retailers
+                properties:
+                  retailers:
+                    type: array
+                    items:
+                      $ref: './../../schemas/Retailer.yaml'
+
+post:
+  operationId: createRetailer
+  summary: Create a Retailer
+  description: |
+    Create a new Retailer.
+  tags:
+    - Retailer
+    - AdminAuthScope
+  security:
+    - bearerAuth: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - name
+          type: object
+          additionalProperties: false
+          properties:
+            name:
+              type: string
+            location:
+              $ref: './../../schemas/Location.yaml'
+            contact:
+              $ref: './../../schemas/Contact.yaml'
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: object
+                required:
+                  - retailer
+                properties:
+                  retailer:
+                    $ref: './../../schemas/Retailer.yaml'
